@@ -1,0 +1,93 @@
+<%= search_form_for @q do |f| %>
+ <form>
+ <div class="container">
+  <div class="row">
+    <div class="form-group col-6">
+      <%= f.label :question_cont, class:"form-label"%>
+      <%= f.search_field :question_cont, class:"form-control "%>
+    </div>
+      <br/>
+    <div class="form-group col-6">    
+    <%= f.label :answer_cont ,class:"form-label"%>
+    <%= f.search_field :answer_cont , class:"form-control "%>
+         </div>
+
+      <br/>
+          <div class="form-group col-6">
+
+    <%= f.label :question_and_answer_cont ,class:"form-label"%>
+    <%= f.search_field :question_and_answer_cont , class:"form-control "%>
+       </div>
+
+    <br/>
+
+    <div class="form-group col-6">
+
+    <%= f.label :question_or_answer_cont ,class:"form-label"%>
+    <%= f.search_field :question_or_answer_cont , class:"form-control "%>
+       </div>
+
+    <br/>
+    <div class="form-group col-6">
+    <%= f.label :question_or_answer_not_cont ,class:"form-label"%>
+    <%= f.search_field :question_or_answer_not_cont , class:"form-control "%>
+    </div>
+    <br/>
+       <div class="form-group col-6">
+    <%= f.label :question_or_answer_lt_all ,class:"form-label"%>
+    <%= f.search_field :question_or_answer_lt_all , class:"form-control "%>
+
+    </div>
+
+
+    <%# f.label :answer_start %>
+    <%# f.search_field :answer_start %>
+
+    <%# f.label :question_or_description_or_answer %>
+    <%# f.search_field :question_or_description_or_answer %>
+      <br/>
+      <br/>
+      
+    <div class="form-group col-6">
+
+  <%= f.submit %>
+  </div>
+  </div>
+    </div>
+
+</form>
+<% end %>
+
+<p id="notice"><%= notice %></p>
+
+<div class="card text-white bg-dark">
+  <div class="card-body">
+<%= display_query_sql(@people) %>
+</div>
+</div>
+<br>
+
+<h1>Data</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Question</th>
+      <th>Answer</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @people.each do |datum| %>
+      <tr>
+        <td><%= highlight(datum.question, params[:q][:question_cont])%></td>
+        <td><%= highlight(datum.answer, params[:q][:answer_cont])%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Datum', new_datum_path %>
