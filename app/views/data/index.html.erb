@@ -79,12 +79,23 @@
   </thead>
 
   <tbody>
+<% if params.has_key?(:q) %>
     <% @people.each do |datum| %>
       <tr>
         <td><%= highlight(datum.question, params[:q][:question_cont])%></td>
         <td><%= highlight(datum.answer, params[:q][:answer_cont])%></td>
       </tr>
     <% end %>
+<% else %>
+      <% @people.each do |datum| %>
+      <tr>
+        <td><%= datum.question%></td>
+        <td><%= datum.answer%></td>
+      </tr>
+    <% end %>
+
+<% end %>
+
   </tbody>
 </table>
 
